@@ -3,7 +3,7 @@ import { FaGithubAlt, FaPlus, FaSpinner } from 'react-icons/fa';
 
 import api from '../../services/api';
 
-import { Container, Form, SubmitButton } from './styles';
+import { Container, Form, SubmitButton, List } from './styles';
 
 export default function Main() {
   const [newUser, setNewUser] = useState('');
@@ -39,7 +39,7 @@ export default function Main() {
       <Form onSubmit={handleSubmit}>
         <input
           type="text"
-          placeholder="Add repository"
+          placeholder="Add user"
           value={newUser}
           onChange={handleInputChange}
         />
@@ -52,6 +52,15 @@ export default function Main() {
           )}
         </SubmitButton>
       </Form>
+
+      <List>
+        {users.map(user => (
+          <li key={user.name}>
+            <span>{user.name}</span>
+            <a href="">Details</a>
+          </li>
+        ))}
+      </List>
     </Container>
   );
 }
