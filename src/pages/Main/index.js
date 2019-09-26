@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { FaGithubAlt, FaPlus, FaSpinner } from 'react-icons/fa';
 
 import api from '../../services/api';
@@ -12,7 +12,31 @@ export default function Main() {
 
   const handleInputChange = e => setNewUser(e.target.value);
 
-  const handleSubmit = async e => {
+  function usePrevious(value) {
+    const ref = useRef();
+
+    useEffect(() => {
+      ref.current = value;
+    }, [value]);
+
+    return ref.current;
+  }
+
+  const prevUsers = usePrevious(users);
+
+  useEffect(() => {
+    const usersLocal = localStorage.getItem('users');
+    return usersLocal && setUsers(JSON.parse(usersLocal));
+  }, []);
+
+  useEffect(() => {
+    return (
+      prevUsers !== users &&
+      localStorage.setItem('users', JSON.stringify(users))
+    );
+  }, [users]);
+
+  async function handleSubmit(e) {
     e.preventDefault();
 
     setLoading(true);
@@ -27,7 +51,7 @@ export default function Main() {
     setNewUser('');
     setLoading(false);
     console.log(users);
-  };
+  }
 
   return (
     <Container>
