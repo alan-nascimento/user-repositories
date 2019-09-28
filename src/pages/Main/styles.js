@@ -60,7 +60,7 @@ export const Error = styled.small`
 
 export const SubmitButton = styled.button.attrs(props => ({
   type: 'submit',
-  disabled: props.loading,
+  disabled: props.loading === 'true' && true,
 }))`
   background: #1e2434;
   border: 0;
@@ -79,7 +79,7 @@ export const SubmitButton = styled.button.attrs(props => ({
   }
 
   ${props =>
-    props.loading &&
+    props.loading === 'true' &&
     css`
       svg {
         animation: ${Rotate} 2s linear infinite;

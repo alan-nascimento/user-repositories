@@ -41,10 +41,11 @@ export default function Main() {
         Repositories
       </h1>
 
-      <Form onSubmit={handleSubmit}>
+      <Form data-testid="search-form" onSubmit={handleSubmit}>
         <div>
           <Error error={error}>Unable to get this user!</Error>
           <input
+            data-testid="search-input"
             type="text"
             placeholder="Search for a user"
             value={user}
@@ -52,16 +53,16 @@ export default function Main() {
           />
         </div>
 
-        <SubmitButton loading={loading}>
+        <SubmitButton data-testid="submit-button" loading={loading.toString()}>
           {loading ? (
-            <FaSpinner loading={loading} color="#fff" size={14} />
+            <FaSpinner loading={loading.toString()} color="#fff" size={14} />
           ) : (
             <FaSearch color="#fff" size={14} />
           )}
         </SubmitButton>
       </Form>
 
-      <List>
+      <List data-testid="repo-list">
         {repositories.map(repo => (
           <li key={repo.id}>
             <a href={repo.html_url} target="blank">
