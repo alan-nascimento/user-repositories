@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { FaGithubAlt, FaSearch, FaSpinner, FaStar } from 'react-icons/fa';
 
-import api from '../../services/api';
+import api from '~/services/api';
 import { Container, Form, SubmitButton, List, Error } from './styles';
 
 export default function Main() {
